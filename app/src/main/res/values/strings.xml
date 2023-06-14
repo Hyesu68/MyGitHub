@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">My GitHub</string>
+    <string name="not_found">Not found</string>
+    <string name="search">Search...</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
 </resources>

@@ -18,13 +18,22 @@ class UsersPresenter(val view: UsersContract.View): UsersContract.Presenter {
                     val body = response.body()
                     if (body != null) {
                         view.showUsers(body.items)
+                    } else {
+                        setMessage("Empty response body")
                     }
+                } else {
+                    setMessage(response.message())
                 }
             }
 
             override fun onFailure(call: Call<UsersData>, t: Throwable) {
-                TODO("Not yet implemented")
+                setMessage(t.message)
             }
         })
+    }
+
+    private fun setMessage(message: String?) {
+        val errorMessage = "Network request failed: $message"
+        view.showFailure(errorMessage)
     }
 }

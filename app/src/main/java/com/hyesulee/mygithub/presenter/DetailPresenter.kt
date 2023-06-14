@@ -19,16 +19,21 @@ class DetailPresenter(val view: DetailContract.View): DetailContract.Presenter {
                     if (body != null) {
                         view.showUserDetail(body)
                     } else {
-                        view.showFailure("no")
+                        setMessage("Empty response body")
                     }
                 } else {
-                    view.showFailure(response.message())
+                    setMessage(response.message())
                 }
             }
 
             override fun onFailure(call: Call<UserDetails>, t: Throwable) {
-                view.showFailure(t.message.toString())
+                setMessage(t.message)
             }
         })
+    }
+
+    private fun setMessage(message: String?) {
+        val errorMessage = "Network request failed: $message"
+        view.showFailure(errorMessage)
     }
 }

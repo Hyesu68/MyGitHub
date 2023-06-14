@@ -3,7 +3,10 @@ package com.hyesulee.mygithub.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.hyesulee.mygithub.R
 import com.hyesulee.mygithub.contract.DetailContract
 import com.hyesulee.mygithub.databinding.ActivityDetailBinding
 import com.hyesulee.mygithub.model.UserDetails
@@ -20,12 +23,17 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         val login = intent.getStringExtra("login")
         if (login != null) {
             presenter.getUserDetail(login)
+            binding.detailToolBar.title = login
         } else {
             finish()
         }
+
+        binding.detailToolBar.setNavigationOnClickListener { finish() }
     }
 
     override fun showUserDetail(result: UserDetails) {
+        binding.detailProgressBar.visibility = View.GONE
+
         binding.usernameTextView.text = result.login
         binding.nameTextView.text = result.name
         binding.descriptionTextView.text = result.bio
@@ -35,9 +43,12 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         Glide.with(applicationContext)
             .load(result.avatarUrl)
             .circleCrop()
+            .placeholder(R.drawable.placeholder)
             .into(binding.detailAvatarImageView)
 
+        binding.followerText.setOnClickListener { moveToFollowActivity(result.login, true) }
         binding.followerTextView.setOnClickListener { moveToFollowActivity(result.login, true) }
+        binding.followingText.setOnClickListener { moveToFollowActivity(result.login, false) }
         binding.followingTextView.setOnClickListener { moveToFollowActivity(result.login, false) }
     }
 
@@ -49,6 +60,7 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
     }
 
     override fun showFailure(message: String) {
-
+        binding.detailProgressBar.visibility = View.GONE
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 }

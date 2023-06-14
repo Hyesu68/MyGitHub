@@ -2,6 +2,7 @@ package com.hyesulee.mygithub.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hyesulee.mygithub.contract.FollowContract
@@ -22,22 +23,33 @@ class FollowListActivity : AppCompatActivity(), FollowContract.View {
         val isFollower = intent.getBooleanExtra("isFollower", false)
         if (login != null) {
             if (isFollower) {
+                binding.followToolBar.title = "Followers"
                 presenter.getFollowerList(login)
             } else {
+                binding.followToolBar.title = "Following"
                 presenter.getFollowingList(login)
             }
         } else {
             finish()
         }
+
+        binding.followToolBar.setNavigationOnClickListener { finish() }
     }
 
     override fun showFollowList(result: ArrayList<Items>) {
+        binding.followProgressBar.visibility = View.GONE
+
+        if (result.size == 0) {
+            binding.followNotFoundTextView.visibility = View.VISIBLE
+        }
+
         searchAdapter = SearchResultsAdapter(result)
         binding.followRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
         binding.followRecyclerView.adapter = searchAdapter
     }
 
     override fun showFailure(message: String) {
+        binding.followProgressBar.visibility = View.GONE
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 }

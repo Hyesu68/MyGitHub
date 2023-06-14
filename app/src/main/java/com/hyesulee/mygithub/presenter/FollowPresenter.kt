@@ -2,7 +2,6 @@ package com.hyesulee.mygithub.presenter
 
 import com.hyesulee.mygithub.contract.FollowContract
 import com.hyesulee.mygithub.model.Items
-import com.hyesulee.mygithub.model.UsersData
 import com.hyesulee.mygithub.network.RetrofitClient
 import com.hyesulee.mygithub.network.SearchService
 import retrofit2.Call
@@ -19,12 +18,16 @@ class FollowPresenter(val view: FollowContract.View): FollowContract.Presenter {
                     val body = response.body()
                     if (body != null) {
                         view.showFollowList(body)
+                    } else {
+                        setMessage("Empty response body")
                     }
+                } else {
+                    setMessage(response.message())
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<Items>>, t: Throwable) {
-                view.showFailure(t.message.toString())
+                setMessage(t.message)
             }
         })
     }
@@ -37,13 +40,22 @@ class FollowPresenter(val view: FollowContract.View): FollowContract.Presenter {
                     val body = response.body()
                     if (body != null) {
                         view.showFollowList(body)
+                    } else {
+                        setMessage("Empty response body")
                     }
+                } else {
+                    setMessage(response.message())
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<Items>>, t: Throwable) {
-                view.showFailure(t.message.toString())
+                setMessage(t.message)
             }
         })
+    }
+
+    private fun setMessage(message: String?) {
+        val errorMessage = "Network request failed: $message"
+        view.showFailure(errorMessage)
     }
 }

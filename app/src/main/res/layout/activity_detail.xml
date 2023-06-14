@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".view.DetailActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/detail_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/detail_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/back"
+            app:titleCentered="true"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <ImageView
         android:id="@+id/detail_avatar_image_view"
         android:layout_width="150dp"
@@ -13,35 +28,40 @@
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/detail_app_bar"/>
 
     <TextView
-        android:id="@+id/username_text_view"
+        android:id="@+id/name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_avatar_image_view"/>
 
     <TextView
-        android:id="@+id/name_text_view"
+        android:id="@+id/username_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_text_view"/>
-
-    <TextView
-        android:id="@+id/description_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_text_view"/>
+
+    <TextView
+        android:id="@+id/description_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_text_view"/>
 
     <TextView
         android:id="@+id/follower_text_view"
@@ -50,7 +70,7 @@
         android:text="0"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_marginEnd="5dp"
+        android:padding="5dp"
         app:layout_constraintEnd_toStartOf="@+id/follower_text"
         app:layout_constraintTop_toTopOf="@+id/follower_text"
         app:layout_constraintBottom_toBottomOf="@id/follower_text"/>
@@ -59,20 +79,22 @@
         android:id="@+id/follower_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Followers"
+        android:text="@string/followers"
         android:textColor="@color/black"
+        android:padding="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_text_view"
-        app:layout_constraintEnd_toStartOf="@+id/follow_divider"/>
+        app:layout_constraintEnd_toEndOf="@+id/follow_divider"
+        app:layout_constraintTop_toTopOf="@+id/follow_divider"
+        app:layout_constraintBottom_toBottomOf="@+id/follow_divider"/>
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/follow_divider"
         android:layout_width="1dp"
-        android:layout_height="0dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/follower_text"
-        app:layout_constraintBottom_toBottomOf="@id/follower_text_view"/>
+        app:layout_constraintTop_toBottomOf="@+id/description_text_view"/>
 
     <TextView
         android:id="@+id/following_text_view"
@@ -81,7 +103,7 @@
         android:text="0"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_marginEnd="5dp"
+        android:padding="5dp"
         app:layout_constraintEnd_toStartOf="@+id/following_text"
         app:layout_constraintTop_toTopOf="@+id/following_text"
         app:layout_constraintBottom_toBottomOf="@id/following_text"/>
@@ -90,10 +112,21 @@
         android:id="@+id/following_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Following"
+        android:text="@string/following"
         android:textColor="@color/black"
+        android:padding="5dp"
         app:layout_constraintStart_toEndOf="@+id/follow_divider"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_text_view"/>
+        app:layout_constraintTop_toTopOf="@+id/follow_divider"
+        app:layout_constraintBottom_toBottomOf="@+id/follow_divider"/>
+
+    <ProgressBar
+        android:id="@+id/detail_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

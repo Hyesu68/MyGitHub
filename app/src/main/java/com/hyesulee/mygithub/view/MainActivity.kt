@@ -2,6 +2,7 @@ package com.hyesulee.mygithub.view
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hyesulee.mygithub.contract.UsersContract
@@ -20,8 +21,10 @@ class MainActivity : AppCompatActivity(), UsersContract.View {
 
         binding.mainSearchView.editText
             .setOnEditorActionListener { v, actionId, event ->
-                binding.mainProgressBar.visibility = View.VISIBLE
                 presenter.getUsers(binding.mainSearchView.editText.text.toString())
+
+                binding.mainProgressBar.visibility = View.VISIBLE
+                binding.notFoundTextView.visibility = View.GONE
 
                 binding.mainSearchBar.text = binding.mainSearchView.text
                 binding.mainSearchView.hide()
@@ -32,8 +35,16 @@ class MainActivity : AppCompatActivity(), UsersContract.View {
     override fun showUsers(result: ArrayList<Items>) {
         binding.mainProgressBar.visibility = View.GONE
 
+        if (result.size == 0) {
+            binding.notFoundTextView.visibility = View.VISIBLE
+        }
+
         searchAdapter = SearchResultsAdapter(result)
         binding.mainRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
         binding.mainRecyclerView.adapter = searchAdapter
+    }
+
+    override fun showFailure(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.hyesulee.mygithub.R
 import com.hyesulee.mygithub.databinding.ItemSearchResultBinding
 import com.hyesulee.mygithub.model.Items
 
@@ -24,6 +25,7 @@ class SearchResultsAdapter(private val result: ArrayList<Items>): RecyclerView.A
                 Glide.with(itemView.context)
                     .load(this.avatarUrl)
                     .circleCrop()
+                    .placeholder(R.drawable.placeholder)
                     .into(binding.avatarImageView)
 
                 itemView.setOnClickListener {
