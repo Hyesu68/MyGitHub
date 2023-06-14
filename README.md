@@ -33,4 +33,4 @@
 
 ## Demo Video
 
-[![IU(아이유) _ Into the I-LAND](https://github.com/Hyesu68/MyGitHub/assets/40760917/9c7f269e-df6f-4f5f-b8cb-cbb53c0d0fdc)](https://youtu.be/mRYQjaH_hZE?t=0s)
+https://youtu.be/mRYQjaH_hZE?t=0s
