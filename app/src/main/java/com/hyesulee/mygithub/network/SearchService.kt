@@ -1,5 +1,6 @@
 package com.hyesulee.mygithub.network
 
+import com.hyesulee.mygithub.model.Items
 import com.hyesulee.mygithub.model.UserDetails
 import com.hyesulee.mygithub.model.UsersData
 import retrofit2.Call
@@ -17,4 +18,14 @@ interface SearchService {
     fun getUserDetail(
         @Path("username") username: String,
     ): Call<UserDetails>
+
+    @GET("users/{username}/followers")
+    fun getFollowers(
+        @Path("username") username: String
+    ): Call<ArrayList<Items>>
+
+    @GET("users/{username}/following")
+    fun getFollowing(
+        @Path("username") username: String
+    ): Call<ArrayList<Items>>
 }

@@ -1,5 +1,6 @@
 package com.hyesulee.mygithub.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
@@ -35,6 +36,16 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
             .load(result.avatarUrl)
             .circleCrop()
             .into(binding.detailAvatarImageView)
+
+        binding.followerTextView.setOnClickListener { moveToFollowActivity(result.login, true) }
+        binding.followingTextView.setOnClickListener { moveToFollowActivity(result.login, false) }
+    }
+
+    private fun moveToFollowActivity(login: String?, isFollower: Boolean) {
+        val intent = Intent(this, FollowListActivity::class.java)
+        intent.putExtra("login", login)
+        intent.putExtra("isFollower", isFollower)
+        startActivity(intent)
     }
 
     override fun showFailure(message: String) {

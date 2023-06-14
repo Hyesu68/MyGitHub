@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MyGitHub"
         tools:targetApi="31">
         <activity
+            android:name=".view.FollowListActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.DetailActivity"
             android:exported="false" />
         <activity
