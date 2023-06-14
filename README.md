@@ -28,8 +28,8 @@
 
 ## Libraries Used
 
-⁃	Glide : Used for efficient image loading and caching.
-⁃	Retrofit : Used for API communication.
+- Glide : Used for efficient image loading and caching.
+- Retrofit : Used for API communication.
 
 ## Demo Video
 
