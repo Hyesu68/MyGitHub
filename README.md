@@ -9,7 +9,7 @@
 - **Followers and Following:** Users can explore the followers and following lists of a selected user.
 
 ## Screenshots
-![Purple App Phone Mockup Sales Marketing Presentation-2](https://github.com/Hyesu68/MyGitHub/assets/40760917/182355e0-c79a-4284-a32b-a31853b9b9e4)
+![Purple App Phone Mockup Sales Marketing Presentation-2](https://github.com/Hyesu68/MyGitHub/assets/40760917/c760e6a0-26e7-4715-b954-45b721cbeab0)
 
 ## Getting Started
 
