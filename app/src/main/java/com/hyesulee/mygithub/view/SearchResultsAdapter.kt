@@ -1,5 +1,6 @@
 package com.hyesulee.mygithub.view
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,12 @@ class SearchResultsAdapter(private val result: ArrayList<Items>): RecyclerView.A
                     .load(this.avatarUrl)
                     .circleCrop()
                     .into(binding.avatarImageView)
+
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailActivity::class.java)
+                    intent.putExtra("login", this.login)
+                    itemView.context.startActivity(intent)
+                }
             }
         }
     }
